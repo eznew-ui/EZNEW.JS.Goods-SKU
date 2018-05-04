@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>商品属性规格选择</title>
+		<style type="text/css">
+			.tit{
+				display: inline-block;
+			}
+			.item-con{
+				display: inline-block;
+			}
+			.item{
+				display: inline-block;
+				border: 1px solid #DDDDDD;
+				padding: 5px;
+				cursor: pointer;
+				background: #fff;
+			}
+			.item.disabled{
+				background: red;
+				color: #fff;
+			}
+			.item.selected{
+				background: blue;
+				color: #fff;
+			}
+			.property_item{
+				//margin-top: 10px;
+				padding: 10px;
+				border-bottom: 1px dashed #CCCCCC;
+			}
+			.property_empty_bg{
+				background: #ebebeb;
+			}
+		</style>
+	</head>
+	<body>
+		<div style="border-bottom: 1px dashed #CCCCCC;padding: 10px">
+			颜色说明：<div style="display: inline-block;border: 1px solid #ddd; width: 50px; height: 50px ; text-align: center;line-height: 50px;">可选</div>
+			<div style="display: inline-block;border: 1px solid #ddd; width: 50px; height: 50px ; text-align: center;line-height: 50px; background: blue; color: #fff;">已选</div>
+			<div style="display: inline-block;border: 1px solid #ddd; width: 50px; height: 50px ; text-align: center;line-height: 50px;background: red; color: #fff;">禁用</div>
+		</div>
+		<div id="choosecon">
+			<div class="property_item">
+				<div class="tit">颜色</div>
+				<div class="item-con">
+					<div class="item" pro-val="1001">红色</div>
+					<div class="item" pro-val="1002">白色</div>
+					<div class="item" pro-val="1003">黄色</div>
+					<div class="item" pro-val="1004">蓝色</div>
+（始终可以点击选择）
+				</div>
+			</div>
+			<div class="property_item">
+				<div class="tit">容量</div>
+				<div class="item-con">
+					<div class="item" pro-val="2001">8G</div>
+					<div class="item" pro-val="2002">16G</div>
+					<div class="item" pro-val="2003">32G</div>
+					<div class="item" pro-val="2004">64G</div>
+					<div class="item" pro-val="2005">128G</div>
+				</div>
+			</div>
+			
+			<div class="property_item">
+				<div class="tit">版本</div>
+				<div class="item-con">
+					<div class="item" pro-val="3001">电信</div>
+					<div class="item" pro-val="3002">移动</div>
+					<div class="item" pro-val="3003">联通</div>
+				</div>
+			</div>
+		</div>
+		<div style="margin-top: 10px;padding: 10px;">当前所选商品编号：<span id="skuid_txt"></span></div>
+		
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript" src="sku.js"></script>
+		
+		<script type="text/javascript">
+			$(function(){
+//				var dics={};
+//				eval('dics[1]=123');
+//				alert(dics[1]);
+				var sku=new PropertyChoice(
+					{
+						propertyData:[
+							{id:123,values:[{pro:101,val:1001},{pro:201,val:2002},{pro:301,val:3001}]},
+							{id:124,values:[{pro:101,val:1002},{pro:201,val:2001},{pro:301,val:3003}]},
+							{id:125,values:[{pro:101,val:1002},{pro:201,val:2002},{pro:301,val:3002}]},
+							{id:126,values:[{pro:101,val:1004},{pro:201,val:2005},{pro:301,val:3001}]},
+							{id:127,values:[{pro:101,val:1004},{pro:201,val:2003},{pro:301,val:3002}]},
+							{id:128,values:[{pro:101,val:1003},{pro:201,val:2004},{pro:301,val:3002}]}
+						],
+						selectedCallback:function(id){
+							$("#skuid_txt").text(id);
+						},
+						currentSkuId:127
+					});
+//					alert(sku.PropertyCombinbingDic.length);
+				for(var p in sku.PropertyCombinbingDic){
+					if(sku.PropertyCombinbingDic[p]){
+						//alert('yes');
+					}else{
+						//alert('no')
+					}
+				}
+			});
+		</script>
+	</body>
+
+</html>
